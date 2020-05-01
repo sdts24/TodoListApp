@@ -27,18 +27,21 @@ class TodoDetailState extends State<TodoDetail> {
     TextStyle textStyle = Theme.of(context).textTheme.title;
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(todo.title),
-      ),
-      body: Column(
-        children: <Widget>[
-          _textTitleField(textStyle),
-          _textDescriptionField(textStyle),
-          _dropDownButton(textStyle)
-        ],
-      ),
-    );
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(todo.title),
+        ),
+        body: ListView(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                _textTitleField(textStyle),
+                _textDescriptionField(textStyle),
+                _dropDownButton(textStyle)
+              ],
+            ),
+          ],
+        ));
   }
 
 //Text Field para el Titulo
@@ -67,18 +70,17 @@ class TodoDetailState extends State<TodoDetail> {
     );
   }
 
-  Widget _dropDownButton(TextStyle textStyle){
-      return DropdownButton<String>(
-        items: _priorities.map((String value){
-          return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-          );
-        }).toList(),
-        style: textStyle,
-        value: "Low",
-        onChanged: null,
-      );
+  Widget _dropDownButton(TextStyle textStyle) {
+    return DropdownButton<String>(
+      items: _priorities.map((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      style: textStyle,
+      value: "Low",
+      onChanged: null,
+    );
   }
-
 }

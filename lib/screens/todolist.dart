@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/todo.dart';
+import 'package:todo_app/screens/tododetails.dart';
 import 'package:todo_app/util/dbhelper.dart';
 
 class TodoList extends StatefulWidget {
@@ -23,12 +24,40 @@ class _TodoListState extends State<TodoList> {
 
       body: todoListItems(),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: (){
+          navigateToDetail(Todo("",3,""));
+        },
         tooltip: "Add new Todo",
         child: Icon(Icons.add),
       ),
       
     );
+  }
+
+  Widget todoListItems(){
+
+    return ListView.builder(
+            itemCount: count,
+            itemBuilder: (BuildContext context, int position){
+              return Card(
+                color: Colors.white,
+                elevation: 2.0,
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.red,
+                    child: Text(this.todos[position].id.toString()),
+                  ),
+                  title:Text(this.todos[position].title), 
+                  subtitle: Text(this.todos[position].date),
+                  onTap: (){
+                    debugPrint("Hizo click en " + this.todos[position].id.toString());
+                    navigateToDetail(this.todos[position]);
+                  },
+                ),
+              );
+        },
+    );
+
   }
 
 
@@ -53,4 +82,13 @@ class _TodoListState extends State<TodoList> {
       });
     });
   }
+
+//Metodo para navegar de una pagina a otra...
+
+  void navigateToDetail(Todo todo) async {
+    bool result = await Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => TodoDetail(todo)),
+    );
+  }
+  
 }

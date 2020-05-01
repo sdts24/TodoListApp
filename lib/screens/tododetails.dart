@@ -37,7 +37,7 @@ class TodoDetailState extends State<TodoDetail> {
               children: <Widget>[
                 _textTitleField(textStyle),
                 _textDescriptionField(textStyle),
-                _dropDownButton(textStyle)
+                ListTile(title:  _dropDownButton(textStyle))
               ],
             ),
           ],
@@ -79,7 +79,7 @@ class TodoDetailState extends State<TodoDetail> {
         );
       }).toList(),
       style: textStyle,
-      value: "Low",
+      value: _priority,
       onChanged: null,
     );
   }

@@ -6,14 +6,12 @@ import 'package:todo_app/model/todo.dart';
 
 class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
-
   String tblTodo = "todo";
   String colId = "id";
   String colTitle = "title";
   String colDescription = "description";
   String colPriority = "priority";
   String colDate = "date";
-
   DbHelper._internal();
 
   factory DbHelper() {
@@ -44,7 +42,7 @@ class DbHelper {
             "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)");
   }
 
-  Future<int> insertTodo(Todo todo) async {
+insertTodo(Todo todo) async {
     Database db = await this.db;
     var result = await db.insert(tblTodo, todo.toMap());
 
@@ -77,4 +75,5 @@ class DbHelper {
     var result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId = $id');
     return result;
   }
+
 }
